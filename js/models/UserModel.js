@@ -42,10 +42,10 @@ define([
         /** Validate Date of Birth */
         checkDateOfBirth: function(value, attr, computedState){
             var isValid = false;
-            var match = value.match(/\d{2}\.\d{2}\.(\d{4})/);
+            var match = value.match(/(\d{2})\.(\d{2})\.(\d{4})/);
             if ( match ) {
                 var dt = new Date();
-                if ( parseInt( match[1], 10 ) < dt.getFullYear() ) {
+                if ( parseInt( match[3], 10 ) < dt.getFullYear() ) {
                     isValid = true;
                 }
             }
@@ -53,6 +53,13 @@ define([
         },
         
         initialize: function( options ) {
+            
+            this.getLocalStorage();
+            
+        },
+        
+        /** Get data from local storage */
+        getLocalStorage: function(){
             
             var userData = localStorage.getItem('userData');
             if ( userData ) {
