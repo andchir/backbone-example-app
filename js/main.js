@@ -28,7 +28,7 @@ require([
                     ? $.isArray(d)
                     ? d.push(c.value)
                     : a[c.name] = [d, c.value]
-                    : a[c.name] = c.value
+                    : a[c.name] = c.value;
         };
         return $.each(this.serializeArray(), b), a;
     };
