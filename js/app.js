@@ -13,7 +13,7 @@ define([
     
     var initialize = function(){
         
-        //Configute validation
+        //Configure validation
         Backbone.Validation.configure({
             labelFormatter: 'label'
         });
