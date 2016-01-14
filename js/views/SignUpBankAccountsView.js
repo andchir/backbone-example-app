@@ -16,6 +16,15 @@ define([
         initialize: function() {
             
             UserModel.prototype.validation = {
+                firstName: {
+                    required: true
+                },
+                lastName: {
+                    required: true
+                },
+                dob: {
+                    fn: 'validateDateOfBirth'
+                },
                 iban: {
                     fn: 'validateIban'
                 },
