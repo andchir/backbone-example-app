@@ -81,7 +81,7 @@ define([
             
         },
         
-        //labels fot validation messages
+        //labels for validation messages
         labels: {
             firstName: 'First name',
             lastName: 'Last name',
