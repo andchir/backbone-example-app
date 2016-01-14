@@ -9,6 +9,7 @@ require.config({
         underscore: '../bower_components/underscore/underscore-min',
         backbone: '../bower_components/backbone/backbone',
         backbone_validation: '../bower_components/backbone.validation/dist/backbone-validation-amd-min',
+        iban: '../bower_components/iban/iban',
         text: '../bower_components/requirejs-text/text',
         templates: '../templates'
     }

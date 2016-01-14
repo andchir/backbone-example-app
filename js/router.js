@@ -8,13 +8,15 @@ define([
     'underscore',
     'backbone',
     'views/SignUpPersonalDataView',
-    'views/SignUpBankAccountsView'
-], function($, _, Backbone, SignUpPersonalDataView, SignUpBankAccountView) {
+    'views/SignUpBankAccountsView',
+    'views/SignUpSuccessView'
+], function($, _, Backbone, SignUpPersonalDataView, SignUpBankAccountView, SignUpSuccessView) {
     
     var AppRouter = Backbone.Router.extend({
         routes: {
             // Define URL routes
             'step2': 'SignUpBankAccounts',
+            'success': 'SignUpSuccess',
             
             // Default
             '*path': 'SignUpPersonalData'
@@ -33,6 +35,11 @@ define([
         app_router.on('route:SignUpBankAccounts', function (actions) {
             var signUpBankAccountView = new SignUpBankAccountView();
             signUpBankAccountView.render();
+        });
+        
+        app_router.on('route:SignUpSuccess', function (actions) {
+            var signUpSuccessView = new SignUpSuccessView();
+            signUpSuccessView.render();
         });
         
         Backbone.history.start();

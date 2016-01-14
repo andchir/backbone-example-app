@@ -14,8 +14,20 @@ define([
     var SignUpBankAccountsView = Backbone.View.extend({
         el: $("#app"),
         initialize: function() {
+            
+            UserModel.prototype.validation = {
+                iban: {
+                    fn: 'validateIban'
+                },
+                bic: {
+                    fn: 'validateBic'
+                }
+            };
+            
             this.model = new UserModel();
+            
             Backbone.Validation.bind(this);
+            
         },
         events: {
             'click #submitForm': 'submitForm'
@@ -24,6 +36,9 @@ define([
             
             this.$el.html( SignUpBankAccountsViewTemplate );
             
+            this.$('[name="iban"]').val(this.model.get('iban'));
+            this.$('[name="bic"]').val(this.model.get('bic'));
+            
         },
         submitForm: function(e){
             e.preventDefault();
@@ -31,10 +46,16 @@ define([
             var data = this.$('form').serializeObject();
             this.model.set(data);
             
-            console.log('submitForm', this.model.isValid( true ));
-            
             if( this.model.isValid( true ) ){
-                //new Backbone.Router().navigate('/registered');
+                localStorage.setItem('userData', JSON.stringify(this.model.toJSON()));
+                this.model.save({}, {
+                    success: function(model, response, options){
+                        window.location.hash = '/success';
+                    },
+                    error: function(model, response, options){
+                        console.error( response, options );
+                    }
+                });
             }
         }
     });

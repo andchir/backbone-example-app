@@ -14,7 +14,21 @@ define([
     var SignUpPersonalDataView = Backbone.View.extend({
         el: $("#app"),
         initialize: function() {
+            
+            UserModel.prototype.validation = {
+                firstName: {
+                    required: true
+                },
+                lastName: {
+                    required: true
+                },
+                dob: {
+                    fn: 'validateDateOfBirth'
+                }
+            };
+            
             this.model = new UserModel();
+            
             Backbone.Validation.bind(this);
         },
         events: {
@@ -36,7 +50,7 @@ define([
             this.model.set(data);
             
             if( this.model.isValid( true ) ){
-                localStorage.setItem('userData', JSON.stringify(data));
+                localStorage.setItem('userData', JSON.stringify(this.model.toJSON()));
                 window.location.hash = '/step2';
             }
         }

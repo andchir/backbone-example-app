@@ -14,6 +14,9 @@ define([
     var initialize = function(){
         
         //Configute validation
+        Backbone.Validation.configure({
+            labelFormatter: 'label'
+        });
         _.extend(Backbone.Validation.callbacks, {
             valid: function (view, attr, selector) {
                 var $el = view.$('[name=' + attr + ']'), 
